@@ -5,6 +5,6 @@ from restaurants.models import Restaurant
 
 
 class Order(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product)
     total_value = models.FloatField(null=False, blank=False)
