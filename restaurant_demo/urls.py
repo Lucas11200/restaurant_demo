@@ -21,4 +21,5 @@ allowed_methods = {"get": "get", "post": "post"}
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("restaurants", include("restaurants.urls")),
+    path("products", include("products.urls")),
 ]
