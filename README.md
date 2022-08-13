@@ -3,6 +3,17 @@
 # Oque é o repo
 
 # Como rodar o repo
+Criar virtual environment:
+> python -m venv venv  
+
+Ativar virtual environment:
+> source venv/bin/activate
+
+Instalar dependencias do projeto:
+> pip install -r requirements.txt
+
+Rodar o projeto:
+> python manage.py runserver
 
 # Funcionalidades e endpoints
 
