@@ -12,6 +12,9 @@ Ativar virtual environment:
 Instalar dependencias do projeto:
 > pip install -r requirements.txt
 
+Apply the migrations
+> python manage.py migrate
+ 
 Rodar o projeto:
 > python manage.py runserver
 
