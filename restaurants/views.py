@@ -12,12 +12,6 @@ class RestaurantsView(ViewSet):
     def get(request, restaurant_id=None):
         # WIP TODO: refactor this
         if restaurant_id:
-            db_restaurants = [Restaurant.objects.get(id=restaurant_id)]
-        else:
-            db_restaurants = Restaurant.objects.all()
-        restaurants = serializers.RestaurantSerializer(db_restaurants, many=True).data
-        response = json.loads(json.dumps(restaurants))
-        return HttpResponse(response)
 
     @staticmethod
     def post(request):
