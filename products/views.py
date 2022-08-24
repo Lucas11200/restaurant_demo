@@ -1,28 +1,29 @@
-import json
-from typing import List
+from typing import List, Optional
 
 from django.http import HttpResponse
 from rest_framework.viewsets import ViewSet
 
+from products.builders import ProductsBuilder
+from products.factories import ProductsFactory
 from products.models import Product, Customization
-from products.serializers import ProductSerializer
+from products.services import ProductsService
+
+products_service = ProductsService()
+products_factory = ProductsFactory()
+products_builder = ProductsBuilder()
 
 
 class ProductsView(ViewSet):
     @staticmethod
-    def get(request, sku_list=None):
-        if sku_list:
-            db_products = [Product.objects.filter(pk__in=sku_list)]
-        else:
-            db_products = Product.objects.all()
-        products = ProductSerializer(db_products, many=True).data
-        response = json.loads(json.dumps(products))
+    def get(request, sku_list: Optional[List[str]] = None):
+        db_products = products_factory.filter_products(sku_list)
+        response = products_builder.build(db_products)
         return HttpResponse(response)
 
     @staticmethod
     def delete(request):
         sku_list: List[str] = request.data
-        db_products = Product.objects.filter(pk__in=sku_list)
+        db_products = products_service.filter_by_sku(sku_list)
         db_products.delete()
         return HttpResponse("ok")
 
