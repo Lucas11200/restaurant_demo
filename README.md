@@ -20,7 +20,24 @@
 
 # Endpoints (TBD)
 
-# Pull Request pattern (TBD)
+# Branch patterns
+> [type] / [task-id] / [objective_of_the_task]
+
+#### Example:
+> docs/RDD-123/create_branch_pattern
+
+# Pull Request patterns
+The title of the PR is almost like the commit message pattern:
+- **type** of the code modification
+- **scope** showing where the modification were done
+- **task-id** showing why you're doing this PR
+- **objective of the task** summarize the objective of the task 
+
+#### Example:
+> [type] (scope): [task-id] [objective of the task]
+
+### ⚠️ Always link the trello task on the PR description and vice versa!!⚠️
+
 
 # Commit message pattern
 
