@@ -10,8 +10,8 @@ class CustomizationSerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    customization = CustomizationSerializer()
+    # customizations = CustomizationSerializer()
 
     class Meta:
         model = Product
-        exclude = []
+        exclude = ["customizations"]

@@ -43,6 +43,5 @@ class RestaurantsView(ViewSet):
             country=received_address.get("country"),
         )
         address.save()
-        breakpoint()
         restaurant = Restaurant(brand_id=brand.id, address_id=address.id).save()
         return HttpResponse(restaurant)
