@@ -57,6 +57,7 @@ class ProductsView(ViewSet):
         for received_product in received_products:
             customizations = []
             for received_customization in received_product.get("customizations"):
+                # TODO: Criar um get para verificar se a customização ja está no banco, caso não esteja, cria.
                 customizations.append(
                     Customization(
                         sku=received_customization.get("sku"),
