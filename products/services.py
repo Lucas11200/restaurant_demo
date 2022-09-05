@@ -9,7 +9,7 @@ class ProductsService:
         return Product.objects.filter(pk__in=sku_list)
 
     @staticmethod
-    def filter_by_attributes(attributes: Dict[str,any])-> List[Product]:
+    def filter_by_attributes(attributes: Dict[str, any]) -> List[Product]:
         return Product.objects.filter(**attributes)
 
     @staticmethod
