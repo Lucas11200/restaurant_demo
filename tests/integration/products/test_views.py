@@ -21,15 +21,22 @@ def make_get_request(url_name, kwargs={}):
 @pytest.mark.django_db
 class TestView(unittest.TestCase):
     def test_get_all(self):
+        # --> PREPARAÇÃO DO TESTE
+        # Cria um produto no banco de dados
         payload = {'sku': '321', 'name': 'burg', 'price': 10.0}
         Product(**payload).save()
-        response = make_get_request(settings.GET_PRODUCTS_API_NAME)
-        raw_body = response.content
-        str_body = raw_body.decode("UTF-8")
-        body = ast.literal_eval(str_body)
 
-        assert body is not None
-        self.assertEqual(body, payload)
+        # --> EXECUÇÃO DA UNIDADE TESTADA (SUT - System Under Testing)
+        response = make_get_request(settings.GET_PRODUCTS_API_NAME)
+
+        # --> PREPARAÇÃO DA VALIDAÇÃO
+        raw_body = response.content  # Body da resposta (em bytes)
+        str_body = raw_body.decode("UTF-8")  # Transformo em string utf-8
+        dict_body = ast.literal_eval(str_body)  # Transformo em dicionário
+
+        # --> VALIDAÇÃO
+        assert dict_body is not None  # Verifico se retornou algum produto
+        self.assertEqual(dict_body, payload)  # Verifica exatamente oque a API respondeu
 
     # def test_get_by_sku(self):
     #     payload1 = {'sku': '321', 'name': 'burg', 'price': 10.0}
