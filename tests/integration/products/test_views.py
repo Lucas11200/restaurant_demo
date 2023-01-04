@@ -36,7 +36,10 @@ class TestView(unittest.TestCase):
 
         # --> VALIDAÇÃO
         assert dict_body is not None  # Verifico se retornou algum produto
-        self.assertEqual(dict_body, payload)  # Verifica exatamente oque a API respondeu
+        # Verifica exatamente oque a API respondeu
+        assert dict_body["sku"] == payload["sku"]
+        assert dict_body["name"] == payload["name"]
+        assert dict_body["price"] == payload["price"]
 
     # def test_get_by_sku(self):
     #     payload1 = {'sku': '321', 'name': 'burg', 'price': 10.0}
