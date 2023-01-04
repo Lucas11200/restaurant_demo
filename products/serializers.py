@@ -10,7 +10,7 @@ class CustomizationSerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    customization = CustomizationSerializer()
+    customizations = CustomizationSerializer(many=True, required=False)
 
     class Meta:
         model = Product
