@@ -16,9 +16,16 @@ products_builder = ProductsBuilder()
 class ProductsView(ViewSet):
     @staticmethod
     def get(request, sku_list: Optional[List[str]] = None):
-        db_products = products_factory.filter_products(sku_list)
-        response = products_builder.build(db_products)
-        return HttpResponse(response)
+        if sku_list and len(sku_list) > 0:
+            db_products = products_factory.filter_products_by_sku(sku_list)
+        else:
+            body = request.data
+            db_products = products_factory.filter_products_by_attributes(body)
+        if db_products and len(db_products) > 0:
+            response = products_builder.build(db_products)
+            return HttpResponse(response)
+        else:
+            return HttpResponse("Not Found", 404)
 
     @staticmethod
     def delete(request):
@@ -50,6 +57,7 @@ class ProductsView(ViewSet):
         for received_product in received_products:
             customizations = []
             for received_customization in received_product.get("customizations"):
+                # TODO: Criar um get para verificar se a customização ja está no banco, caso não esteja, cria.
                 customizations.append(
                     Customization(
                         sku=received_customization.get("sku"),
